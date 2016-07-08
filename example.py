@@ -2,22 +2,6 @@ import pygame
 from pygame import *
 
 
-# This class allows you to create a special resizable pygame window.
-# The main surface will remain undistorted, and the part of the window,
-# that is not used, will be filled.
-#
-# All constructor variables are explained in the readme, but if you want 
-# to understand the code, this description of the variables may help you:
-#
-# display_surface - the surface, that will be displayed on the screen
-# background_surface - the surface with the gap filling
-# main_surface - the surface, that you don't want to be distorted
-# 
-# d_w, d_h (you can see these in some functions) - the size (width and height)
-#                                                       of the displayed window
-# m_w, m_h - the size of the main_surface
-
-
 class ResizableWindow:
     def __init__(self,
                  initial_size,
@@ -138,3 +122,30 @@ class ResizableWindow:
     def update(self):
         self.screen.blit(self.display_surface, (0, 0))
         pygame.display.update()
+
+
+pygame.init()
+
+
+window = ResizableWindow((300, 300), (300, 300),
+                         gap_fill_type="gradient_down",
+                         gap_fill_color=(0, 255, 0),
+                         gap_steps=100,
+                         draw_lines=False)
+
+window.main_surface.fill((0,255,0))
+
+while True:   
+    e = pygame.event.wait()
+    if e.type == pygame.QUIT:
+        pygame.quit()
+    
+    if e.type == VIDEORESIZE:
+        window.updateSize(e.dict['size'])
+        
+    if e.type == KEYDOWN and e.key == K_w: 
+        print(pygame.display.Info())
+        
+    
+    window.update()
+    
