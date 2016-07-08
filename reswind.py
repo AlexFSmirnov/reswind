@@ -61,7 +61,7 @@ class ResizableWindow:
                 gap_fill_color = [max(i - 1, 0) for i in gap_fill_color] 
     
     def updateMainSurface(self, new_main_surface):
-        self.main_surface = transform.scale(new_main_surface, main_size)  
+        self.main_surface = transform.scale(new_main_surface, self.main_size)  
     
     def blitMainSurface(self):
         if self.smoothscale:
