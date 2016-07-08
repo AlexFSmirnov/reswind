@@ -37,3 +37,9 @@ Here **initial_size** and **main_size** are the only two required parameters. Le
 * **draw_lines**      - if it is True, two lines will appear between the gap and the main surface. Sometimes it looks good.
 * **lines_color**     - the color of those lines.
 * **smoothscale**     - as I said, the main surface will scale anywhay, so this parameter is responsible for the way, how the surface will be scaled.
+
+Also it is very important to add the following code to your event tracker in pygame:
+```python
+if event.type == pygame.VIDEORESIZE:
+        window.updateSize(e.dict['size']) 
+```
