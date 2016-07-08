@@ -2,9 +2,11 @@
 ResWind is library for pygame, which allows you to create a resizable window without distorting the main surface aspect ratio.
 ## Example
 Here you can find an example (example.py), that will draw a circle in a resizable window.
+
 ![Normal circle](/images/1.png)
 
 If you resize the window, you will see, that the circle doesn't turn into an oval but stays in it's form and moves to the center of the window.
+
 ![Resized circle](/images/2.png)
 
 ## Usage
