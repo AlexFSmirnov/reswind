@@ -142,5 +142,6 @@ class ResizableWindow:
         self.updateScreen(new_size)
     
     def update(self):
+        self.updateDisplaySurface(self.display_surface.get_size())  
         self.screen.blit(self.display_surface, (0, 0))
         pygame.display.update()
