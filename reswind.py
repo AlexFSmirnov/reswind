@@ -26,7 +26,8 @@ class ResizableWindow:
                  gap_fill_color = (0, 0, 0),
                  gap_steps      = 100,
                  draw_lines     = True,
-                 lines_color    = (100, 100, 100)):
+                 lines_color    = (100, 100, 100),
+                 smoothscale    = True):
         
         self.display_surface    = pygame.Surface(initial_size)
         self.background_surface = pygame.Surface(initial_size)
@@ -39,6 +40,7 @@ class ResizableWindow:
         
         self.draw_lines = draw_lines
         self.lines_color = lines_color
+        self.smoothscale = smoothscale
         
         self.gaps_pos = ""
         self.updateGapsPos(initial_size)
@@ -62,7 +64,11 @@ class ResizableWindow:
         self.main_surface = transform.scale(new_main_surface, main_size)  
     
     def blitMainSurface(self):
-        scaled_main = transform.scale(self.main_surface, self.main_scale)
+        if self.smoothscale:
+            scaled_main = transform.smoothscale(self.main_surface, 
+                                                self.main_scale)
+        else:
+            scaled_main = transform.scale(self.main_surface, self.main_scale)
         self.display_surface.blit(scaled_main, self.main_pos)  
         
     def updateGapsPos(self, new_size):
