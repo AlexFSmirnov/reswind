@@ -151,11 +151,12 @@ class ResizableWindow:
         self.screen = display.set_mode(new_size, 
                                        HWSURFACE|DOUBLEBUF|RESIZABLE)
         
-    def updateSize(self, new_size):
-        self.updateGapsPos(new_size)
-        self.updateBackgroundSurface(new_size)
-        self.updateDisplaySurface(new_size)  
-        self.updateScreen(new_size)
+    def updateSize(self, e):
+        if e.type == VIDEORESIZE:
+            self.updateGapsPos(e.dict['size'])
+            self.updateBackgroundSurface(e.dict['size'])
+            self.updateDisplaySurface(e.dict['size'])  
+            self.updateScreen(e.dict['size'])
     
     def update(self):
         self.updateDisplaySurface(self.display_surface.get_size())  

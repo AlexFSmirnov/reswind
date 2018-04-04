@@ -29,17 +29,23 @@ Here **initial_size** and **main_size** are the only two required parameters. Le
  * **initial_size**   - the size of the window, when it is just created.
  * **main_size**      - the size of the main surface, which you don't want to be distorted. Actually, the main surface will scale anyway when it blits to the screen, so this variable is important just to get the aspect ratio.
  * **gap_fill_type**  - how the gaps between the main surface and the window frame will be filled. Possible values:   
-  * *"solid_color"* - the gaps will be filled with a solid color (you can select it using the next parameter).
-  * *"gradient_up"* - the gaps will be filled with a gradient, which becomes **brighter** on the way from the main surface to the frame.
-  * *"gradient_down"* - the gaps will be filled with a gradient, which becomes **darker** on the way from the main surface to the frame.
+    * *"solid_color"* - the gaps will be filled with a solid color (you can select it using the next parameter).
+    * *"gradient_up"* - the gaps will be filled with a gradient, which becomes **brighter** on the way from the main surface to the frame.
+    * *"gradient_down"* - the gaps will be filled with a gradient, which becomes **darker** on the way from the main surface to the frame.
 
 * **gap_fill_color**  - the start color of the gap. If it is solid - whole gap will be colored with this color, if it is a gradient - it will become darker or brighter on it's way to the frame.
 * **draw_lines**      - if it is True, two lines will appear between the gap and the main surface. Sometimes it looks good.
 * **lines_color**     - the color of those lines.
 * **smoothscale**     - as I said, the main surface will scale anywhay, so this parameter is responsible for the way, how the surface will be scaled.
 
-Also it is very important to add the following code to your event tracker in pygame:
+In order to do all the computations and resize itself, the window has to catch the "VIDEORESIZE" event in your event-tracker loop:
 ```python
-if event.type == pygame.VIDEORESIZE:
-        window.updateSize(e.dict['size']) 
+while True:
+    event = pygame.event.wait()
+    ...
+
+    # Here:
+    window.updateSize(event) 
+
+    ...
 ```
